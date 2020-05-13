@@ -7,8 +7,8 @@ ENV PATH $JMETER_HOME/bin:$PATH
 
 # INSTALL PRE-REQ
 RUN apt-get update && \
-    apt-get -y install \
-    wget 
+    apt-get -y install wget procps unzip openssl sysstat
+     
 
 # INSTALL JMETER BASE 
 RUN mkdir /jmeter

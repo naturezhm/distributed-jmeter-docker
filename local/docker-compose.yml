@@ -12,7 +12,7 @@ services:
     networks:
       - jmeter-network
   server:
-    image: pedrocesarti/jmeter-docker:latest
+    image: bradyzm/jmeter-docker:latest
     command: server
     tty: true
     ports:

@@ -1,0 +1,40 @@
+FROM openjdk:8-jre-slim
+ARG JMETER_VERSION
+
+ENV JMETER_VERSION ${JMETER_VERSION:-5.0}
+ENV JMETER_HOME /jmeter/apache-jmeter-$JMETER_VERSION/
+ENV PATH $JMETER_HOME/bin:$PATH
+
+# INSTALL PRE-REQ
+RUN apt-get update && \
+    apt-get -y install wget procps unzip openssl sysstat
+
+# INSTALL JMETER BASE 
+RUN mkdir /jmeter
+WORKDIR /jmeter
+
+# RUN wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz && \
+#     tar -xzf apache-jmeter-$JMETER_VERSION.tgz && \
+#     rm apache-jmeter-$JMETER_VERSION.tgz && \
+#     mkdir /jmeter-plugins && \
+#     cd /jmeter-plugins/ && \
+#     wget https://jmeter-plugins.org/downloads/file/JMeterPlugins-ExtrasLibs-1.4.0.zip && \
+#     unzip -o JMeterPlugins-ExtrasLibs-1.4.0.zip -d /jmeter/apache-jmeter-$JMETER_VERSION
+
+# 新的 jmeter-plugin安装方式，安装plugin放到 install_plugin-manager-new.sh 脚本里
+
+RUN wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz && \
+    tar -xzf apache-jmeter-$JMETER_VERSION.tgz && \
+    rm apache-jmeter-$JMETER_VERSION.tgz
+
+WORKDIR $JMETER_HOME 
+    
+COPY config/user.properties bin/user.properties
+COPY scripts/install_plugin-manager-new.sh .
+COPY scripts/docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN chmod +x install_plugin-manager-new.sh /docker-entrypoint.sh
+RUN ./install_plugin-manager-new.sh
+
+EXPOSE 6000 1099 50000
+ENTRYPOINT ["/docker-entrypoint.sh"]

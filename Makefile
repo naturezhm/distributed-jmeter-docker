@@ -19,3 +19,8 @@ build_new:
 		docker build --build-arg JMETER_VERSION=$$version --tag bradyzm/jmeter-docker:$$version -f Dockerfile_new . ; \
 		docker push bradyzm/jmeter-docker:$$version ; \
 	done < VERSIONS_NEW
+
+helm_package:
+	mkdir -p dist
+	helm package k8s distributed-jmeter-5.2.1.tgz
+	mv distributed-jmeter-5.2.1.tgz dist

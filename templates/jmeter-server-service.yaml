@@ -17,6 +17,9 @@ spec:
     - port: 1099
       protocol: TCP
       name: tcp-1099
+    - port: 4445
+      protocol: TCP
+      name: tcp-4445
   selector:
     app.kubernetes.io/name: {{ include "distributed-jmeter.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

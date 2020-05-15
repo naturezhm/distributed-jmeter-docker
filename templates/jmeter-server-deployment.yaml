@@ -32,3 +32,4 @@ spec:
           ports:
             - containerPort: 50000
             - containerPort: 1099
+            - containerPort: 4445

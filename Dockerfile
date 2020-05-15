@@ -1,4 +1,6 @@
-FROM openjdk:8-jre-slim
+FROM registry.cn-hangzhou.aliyuncs.com/supermonkey_public/java-base:1.1
+LABEL maintainer="zhangming@supermonkey.com.cn"
+
 ARG JMETER_VERSION
 
 ENV JMETER_VERSION ${JMETER_VERSION:-3.3}
@@ -6,9 +8,9 @@ ENV JMETER_HOME /jmeter/apache-jmeter-$JMETER_VERSION/
 ENV PATH $JMETER_HOME/bin:$PATH
 
 # INSTALL PRE-REQ
-RUN apt-get update && \
-    apt-get -y install wget procps unzip openssl sysstat
-     
+# RUN apt-get update \
+    # && apt-get -y install wget procps unzip openssl sysstat net-tools curl 
+# RUN apk add -y 
 
 # INSTALL JMETER BASE 
 RUN mkdir /jmeter

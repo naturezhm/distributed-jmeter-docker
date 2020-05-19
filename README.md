@@ -53,5 +53,17 @@ You can also use this [docker-compose](https://github.com/pedrocesar-ti/distribu
 ## K8s
 For the Kubernetes support, also have a look at the official helm/[chart](https://github.com/helm/charts/tree/master/stable/distributed-jmeter) repository.
 
+### helm 打包和安装
+
+```bash
+# 打包指令
+make helm_package
+
+# 或者手动打包
+# helm package k8s distributed-jmeter-5.2.1.tgz
+
+# 安装helm到制定namespace
+helm install -n jmeter distribute-jmeter distributed-jmeter-5.2.1.tgz
+```
 
 Enjoy! :)

@@ -1,5 +1,5 @@
 build:
-	@docker build  --build-arg JMETER_VERSION=5.2.1 -t bradyzm/jmeter-docker:local -f Dockerfile_new .
+	@docker build  --build-arg JMETER_VERSION=5.2.1 -t bradyzm/jmeter-docker:local -f new.Dockerfile .
 
 # build_all:
 # 	@while read -r version ; do \
@@ -16,7 +16,7 @@ build_old:
 
 build_new:
 	@while read -r version ; do \
-		docker build --build-arg JMETER_VERSION=$$version --tag bradyzm/jmeter-docker:$$version -f Dockerfile_new . ; \
+		docker build --build-arg JMETER_VERSION=$$version --tag bradyzm/jmeter-docker:$$version -f new.Dockerfile . ; \
 		docker push bradyzm/jmeter-docker:$$version ; \
 	done < VERSIONS_NEW
 

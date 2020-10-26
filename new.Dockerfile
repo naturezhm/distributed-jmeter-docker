@@ -29,6 +29,12 @@ RUN wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_V
     tar -xzf apache-jmeter-$JMETER_VERSION.tgz && \
     rm apache-jmeter-$JMETER_VERSION.tgz
 
+# 安装插件 plugins-cmn-jmeter
+RUN wget -P  /jmeter/apache-jmeter-$JMETER_VERSION/lib https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-cmn-jmeter/0.6/jmeter-plugins-cmn-jmeter-0.6.jar \
+    && wget -P  /jmeter/apache-jmeter-$JMETER_VERSION/lib/ext https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-casutg/2.9/jmeter-plugins-casutg-2.9.jar \
+    && wget -P /jmeter/apache-jmeter-$JMETER_VERSION/lib/ext https://repo1.maven.org/maven2/com/blazemeter/jmeter-plugins-random-csv-data-set/0.6/jmeter-plugins-random-csv-data-set-0.6.jar
+
+
 WORKDIR $JMETER_HOME 
 
 # for slaver    
